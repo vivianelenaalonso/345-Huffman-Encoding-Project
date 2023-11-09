@@ -1,27 +1,47 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class HuffmanTreeLetter {
-	public PriorityQueue frequencyQueue;
-	public char[] charArr = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 
-							 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+	public PriorityQueue pQueue;
+	public HashMap<Character, Integer> frequency;
 	
 	public HuffmanTreeLetter() {
-		frequencyQueue = new PriorityQueue();
+		pQueue = new PriorityQueue();
+		frequency = new HashMap<>();
 	}
 	
 	public void encode(String textFile) {
-		int[] frequencyArr = readFile(textFile);
-		System.out.println(Arrays.toString(frequencyArr));
+		readFile(textFile); // read in file and create hashmap
+		
+		// add nodes to priority queue
+		for (char key : frequency.keySet()) {
+			Node node = new Node(frequency.get(key), key);
+			pQueue.add(node);
+		}
+		
+		// create tree
+		Node root = null;
+		while (pQueue.size() > 1) {
+			Node min = pQueue.poll();
+			Node secondMin = pQueue.poll();
+			Node temp = new Node(min.frequency + secondMin.frequency, '-');
+			temp.left = min;
+			temp.right = secondMin;
+			root = temp;
+			pQueue.add(temp);
+		}
+		
+		printEncoding(root, "");
 	}
 	
 	public void decode() {
 		
 	}
 	
-	private int[] readFile(String textFile) {
+	private void readFile(String textFile) {
 		int[] frequencyArr = new int[26];
 		Scanner fileScan = null;
 		try {
@@ -33,18 +53,29 @@ public class HuffmanTreeLetter {
 		if (fileScan == null) {
 			System.out.println("File does not exist");
 		} else {
-			char letterFind = fileScan.nextLine().charAt(0);
 			while (fileScan.hasNext()) {
 				String line = fileScan.nextLine();
 				line = line.toLowerCase();
-				int letter = 0;
 				for (int i = 0; i < line.length(); i++) {
-					frequencyArr[line.charAt(i) - 'a']++;
+					if (frequency.containsKey(line.charAt(i))) {
+						frequency.put(line.charAt(i), frequency.get(line.charAt(i)) + 1);
+					} else {
+						frequency.put(line.charAt(i), 1);
+					}
 				}
 			}
 		}
-		return frequencyArr;
 		
+	}
+	
+	private void printEncoding(Node node, String output) {
+		if (node.left == null && node.right == null) {
+		      System.out.println(node.character + "   |  " + output);
+		      return;
+		    }
+
+		    printEncoding(node.left, output + "0");
+		    printEncoding(node.right, output + "1");
 	}
 	
 	
