@@ -35,6 +35,10 @@ public class PriorityQueue {
         return popped;
     }
 
+    public int size(){
+        return heap.size();
+    }
+
     private void sink(){
         //implement later
         int current = 0;
