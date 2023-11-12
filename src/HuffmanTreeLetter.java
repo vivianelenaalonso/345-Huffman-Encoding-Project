@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class HuffmanTreeLetter {
 	public PriorityQueue pQueue;
-	public HashMap<Character, Integer> frequency;
+	public HashMap<String, Integer> frequency;
 	
 	public HuffmanTreeLetter() {
 		pQueue = new PriorityQueue();
@@ -17,7 +17,7 @@ public class HuffmanTreeLetter {
 		readFile(textFile); // read in file and create hashmap
 		
 		// add nodes to priority queue
-		for (char key : frequency.keySet()) {
+		for (String key : frequency.keySet()) {
 			Node node = new Node(frequency.get(key), key);
 			pQueue.add(node);
 		}
@@ -25,11 +25,11 @@ public class HuffmanTreeLetter {
 		// create tree
 		Node root = null;
 		while (pQueue.size() > 1) {
-			Node min = pQueue.poll();
-			Node secondMin = pQueue.poll();
-			Node temp = new Node(min.frequency + secondMin.frequency, '-');
-			temp.left = min;
-			temp.right = secondMin;
+			Node left = pQueue.pop();
+			Node right = pQueue.pop();
+			Node temp = new Node(left.frequency + right.frequency, "-");
+			temp.left = left;
+			temp.right = right;
 			root = temp;
 			pQueue.add(temp);
 		}
@@ -57,10 +57,10 @@ public class HuffmanTreeLetter {
 				String line = fileScan.nextLine();
 				line = line.toLowerCase();
 				for (int i = 0; i < line.length(); i++) {
-					if (frequency.containsKey(line.charAt(i))) {
-						frequency.put(line.charAt(i), frequency.get(line.charAt(i)) + 1);
+					if (frequency.containsKey(Character.toString(line.charAt(i)))) {
+						frequency.put(Character.toString(line.charAt(i)), frequency.get(Character.toString(line.charAt(i))) + 1);
 					} else {
-						frequency.put(line.charAt(i), 1);
+						frequency.put(Character.toString(line.charAt(i)), 1);
 					}
 				}
 			}
