@@ -84,5 +84,16 @@ public class PriorityQueue {
         }
         return s;
     }
+    
+    /**
+     * Peeks the first index of the heap and returns
+     * the node.
+     */
+    public Node peek() {
+    	if (heap.isEmpty()) {
+    		return null;
+    	}
+    	return heap.get(0);
+    }
 
 }
