@@ -2,7 +2,10 @@
  *  Author: Kevin Li
  *  Purpose: Basic implementation of a HashMap
  */
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class HashMap<K, V> implements Map<K, V>{
 
@@ -88,5 +91,59 @@ public class HashMap<K, V> implements Map<K, V>{
     // Checks if the map is empty
     public Boolean isEmpty() {
         return size == 0;
+    }
+
+    @Override
+    public boolean containsKey(Object key) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'containsKey'");
+    }
+
+    @Override
+    public boolean containsValue(Object value) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'containsValue'");
+    }
+
+    @Override
+    public V get(K key) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'get'");
+    }
+
+    @Override
+    public V remove(Object key) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+    }
+
+    @Override
+    public void putAll(Map<? extends K, ? extends V> m) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'putAll'");
+    }
+
+    @Override
+    public void clear() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'clear'");
+    }
+
+    @Override
+    public Set<K> keySet() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'keySet'");
+    }
+
+    @Override
+    public Collection<V> values() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'values'");
+    }
+
+    @Override
+    public Set<Entry<K, V>> entrySet() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'entrySet'");
     }
 }
