@@ -2,12 +2,12 @@
 public class Node {
 
 	public int frequency;
-	public String character;
+	public Character character;
 	public String word;
 	public Node left;
 	public Node right;
 	
-	public Node(int data, String c) {
+	public Node(int data, char c) {
 		frequency = data;
 		character = c;
 		left = null;
