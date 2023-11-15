@@ -19,7 +19,7 @@ public class PriorityQueue {
         }
 
     public void add(String element, int frequency){
-        Node n = new Node(frequency,element);
+        Node n = new Node(frequency, element);
         heap.add(n);
         int current = heap.size()-1;
         while (heap.get(current).frequency < heap.get(getParent(current)).frequency){

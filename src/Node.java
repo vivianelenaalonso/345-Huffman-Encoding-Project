@@ -20,7 +20,7 @@ public class Node {
 	 * @param w String of Node
 	 * @param f Frequency of Node
 	 */
-	public Node(String w, int f) {
+	public Node(int f, String w) {
 		frequency = f;
 		word = w;
 		left = null;

@@ -102,7 +102,7 @@ public class HuffmanTreeWord {
 	 void makeEncoding() {
 		// Add values to priority queue.
 		for (Map.Entry<String, Integer> frequency : frequencyMap.entrySet()) {
-			priorityQueue.add(new Node(frequency.getKey(), frequency.getValue()));
+			priorityQueue.add(new Node(frequency.getValue(), frequency.getKey()));
 		}
 		
 		Node root = buildTree();
@@ -143,7 +143,7 @@ public class HuffmanTreeWord {
 		while (priorityQueue.size() > 1) {
 			Node left = priorityQueue.pop();
 			Node right = priorityQueue.pop();
-			Node node = new Node(null, left.frequency + right.frequency);
+			Node node = new Node(left.frequency + right.frequency, null);
 			node.left = left;
 			node.right = right;
 			priorityQueue.add(node);
