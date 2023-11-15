@@ -3,6 +3,7 @@
  * @purpose Huffman Encoding by word frequency using a tree structure. 
  */
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -14,6 +15,7 @@ public class HuffmanTreeWord {
 	private Map<String, Integer> frequencyMap;
 	private Map<String, String> huffmanCodes;
 	private StringBuilder encodedText;
+	private StringBuilder decodedText;
 	
 	
 	/**
@@ -31,7 +33,7 @@ public class HuffmanTreeWord {
 	 * 
 	 * @param fileName String name of the the file to read from.
 	 */
-	private void readFile(String fileName) {
+	void readFile(String fileName) {
 		StringBuilder fileText = new StringBuilder();
 		int textLength = 0;
 		try {
@@ -67,7 +69,7 @@ public class HuffmanTreeWord {
 	 * 
 	 * @param text
 	 */
-	private void huffmanEncode(String text) {
+	void huffmanEncode(String text) {
 		encodedText = new StringBuilder();
 		String[] words = text.split(" ");
 		for (String word : words) {
@@ -77,7 +79,8 @@ public class HuffmanTreeWord {
 			}
 			else {
 				// Add identified unknown word to code
-				encodedText.append("UNKNOWN: " + word);
+				encodedText.append(word);
+				encodedText.append(" ");
 			}
 		}
 	}
@@ -86,16 +89,17 @@ public class HuffmanTreeWord {
 	 * Prints the encoded string.
 	 * 
 	 */
-	private void printEncode() {
+	void printEncode() {
 		String eText = encodedText.toString().trim();
-		System.out.println("Encoded text: " + eText);
+		System.out.println("Encoded text: ");
+		System.out.println(eText);
 	}
 	
 	/**
 	 * Creates the Huffman code from the frequency of 
 	 * words in the given text file.
 	 */
-	private void makeEncoding() {
+	 void makeEncoding() {
 		// Add values to priority queue.
 		for (Map.Entry<String, Integer> frequency : frequencyMap.entrySet()) {
 			priorityQueue.add(new Node(frequency.getKey(), frequency.getValue()));
@@ -118,7 +122,7 @@ public class HuffmanTreeWord {
 	 * @param code Code string for each Node.
 	 * @param huffmanCodes Map of the words and their Huffman codes.
 	 */
-	private void generateHuffmanCodes(Node node, String code, Map<String, String> huffmanCodes) {
+	  void generateHuffmanCodes(Node node, String code, Map<String, String> huffmanCodes) {
 		if (node != null) {
 			if (node.word != null) {
 				huffmanCodes.put(node.word, code);
@@ -135,7 +139,7 @@ public class HuffmanTreeWord {
 	 * 
 	 * @return the Huffman Tree Root Node.
 	 */
-	private Node buildTree() {
+	 Node buildTree() {
 		while (priorityQueue.size() > 1) {
 			Node left = priorityQueue.pop();
 			Node right = priorityQueue.pop();
@@ -150,7 +154,7 @@ public class HuffmanTreeWord {
 	/**
 	 * Prints the Huffman Codes.
 	 */
-	private void printCodes() {
+	 void printCodes() {
 		System.out.println("Codes: ");
 		for (Map.Entry<String, String> frequency : huffmanCodes.entrySet()) {
 			System.out.println(frequency.getKey() + " : " + frequency.getValue());
@@ -159,17 +163,36 @@ public class HuffmanTreeWord {
 	
 	/**
 	 * Decodes the given string.
-	 * 
 	 */
-	private void huffmanDecode() {
-		
+	void huffmanDecode() {
+	    decodedText = new StringBuilder();
+	    String[] encodedWords = encodedText.toString().split(" ");
+
+	    for (String encodedWord : encodedWords) {
+	        if (encodedWord.startsWith("UNKNOWN:")) {
+	            // If the word is unknown, extract and append the original word
+	            String unknownWord = encodedWord.substring("UNKNOWN: ".length());
+	            decodedText.append(unknownWord).append(" ");
+	        } else {
+	            // If the word is known, find and append the corresponding word using the Huffman codes
+	            for (Map.Entry<String, String> entry : huffmanCodes.entrySet()) {
+	                if (entry.getValue().equals(encodedWord)) {
+	                    decodedText.append(entry.getKey()).append(" ");
+	                    break;
+	                }
+	            }
+	        }
+	    }
 	}
 	
 	/**
 	 * Prints the decoded string.
 	 * 
 	 */
-	private void printDecode() {
-		
+	void printDecode() {
+		String eText = decodedText.toString().trim();
+		System.out.println();
+		System.out.println("Decoded text: ");
+		System.out.println(eText);
 	}
 }
