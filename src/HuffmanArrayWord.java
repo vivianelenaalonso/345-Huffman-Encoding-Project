@@ -39,7 +39,7 @@ public class HuffmanArrayWord {
         for (Map.Entry<String, Integer> entry : wordMap.entrySet()) {
             String word = entry.getKey();
             int frequency = entry.getValue();
-            pq.add(new String[]{word, Integer.toString(frequency)});
+            pq.add([word, frequency]);
         }
 
         for(int i = 0; i < wordCount; i++) {

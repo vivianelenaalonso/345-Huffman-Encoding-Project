@@ -146,4 +146,16 @@ public class HashMap<K, V> implements Map<K, V>{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'entrySet'");
     }
+
+    @Override
+    public boolean containsKey(Object key) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'containsKey'");
+    }
+
+    @Override
+    public V get(Object key) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'get'");
+    }
 }
