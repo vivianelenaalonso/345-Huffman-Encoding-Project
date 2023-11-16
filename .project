@@ -14,48 +14,6 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>LetterExample1.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/LetterExample1.txt</location>
-		</link>
-		<link>
-			<name>LetterExample2.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/LetterExample2.txt</location>
-		</link>
-		<link>
-			<name>LetterExample3.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/LetterExample3.txt</location>
-		</link>
-		<link>
-			<name>LetterExample4.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/LetterExample4.txt</location>
-		</link>
-		<link>
-			<name>WordExample.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/WordExample.txt</location>
-		</link>
-		<link>
-			<name>WordExample2.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/WordExample2.txt</location>
-		</link>
-		<link>
-			<name>WordExample3.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/WordExample3.txt</location>
-		</link>
-		<link>
-			<name>WordExample4.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/WordExample4.txt</location>
-		</link>
-	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1699407501259</id>
