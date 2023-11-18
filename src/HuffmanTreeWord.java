@@ -47,15 +47,18 @@ public class HuffmanTreeWord {
 				for (int index = 0; index < words.length; index++) {
 					textLength++;
 					if (frequencyMap.containsKey(words[index])) {
-						frequencyMap.put(words[index], 1);
+						frequencyMap.put(words[index], frequencyMap.get(words[index]) + 1);
 					}
 					else {
-						frequencyMap.put(words[index], frequencyMap.get(words[index]) + 1);
+						frequencyMap.put(words[index], 1);
 					}
 				}
 			}
 			file.close();
+			makeEncoding();
+			printCodes();
 			huffmanEncode(fileText.toString().trim());
+			printEncode();
 		}
 		catch (FileNotFoundException exception) {
 			System.out.println("File was not found.");
@@ -79,7 +82,7 @@ public class HuffmanTreeWord {
 			}
 			else {
 				// Add identified unknown word to code
-				encodedText.append(word);
+				encodedText.append("UNKNOWN: " + word);
 				encodedText.append(" ");
 			}
 		}
@@ -109,10 +112,6 @@ public class HuffmanTreeWord {
 	
 		// Huffman codes
 		generateHuffmanCodes(root, "", huffmanCodes);
-		
-		// Print codes debug
-		printCodes();
-		
 	}
 	
 	/**
@@ -127,9 +126,9 @@ public class HuffmanTreeWord {
 			if (node.word != null) {
 				huffmanCodes.put(node.word, code);
 			}
+			generateHuffmanCodes(node.left, code + "0", huffmanCodes);
+			generateHuffmanCodes(node.right, code + "1", huffmanCodes);
 		}
-		generateHuffmanCodes(node.left, code + "0", huffmanCodes);
-		generateHuffmanCodes(node.right, code + "1", huffmanCodes);
 	}
 	
 	
