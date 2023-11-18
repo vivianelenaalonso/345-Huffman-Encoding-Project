@@ -62,7 +62,7 @@ public class HuffmanArrayWord {
 
         // Write to output file
         writeOutputFile(inputFileName, outputFileName, encodeMap);
-        
+
         // Write decode file
         writeDecodeFile(encodeMap, "decode.txt");
     }
@@ -107,7 +107,7 @@ public class HuffmanArrayWord {
             while (scanner.hasNextLine()) {
                 String[] line = scanner.nextLine().split(" ");
 
-                for(int i = 0; i < line.length; i++) {
+                for (int i = 0; i < line.length; i++) {
                     if (i == line.length - 1) {
                         stringBuilder += encodeMap.get(line[i]);
                     } else {
@@ -120,7 +120,7 @@ public class HuffmanArrayWord {
             File outputFile = new File(outputFileName);
             try {
                 outputFile.createNewFile();
-                
+
                 FileWriter writer = new FileWriter(outputFile);
                 writer.write(stringBuilder);
                 writer.close();
@@ -137,7 +137,6 @@ public class HuffmanArrayWord {
         }
     }
 
-
     // Decodes input file and writes to output file
     public void decode(String inputFileName, String outputFileName, String decodeFile) {
 
@@ -149,9 +148,15 @@ public class HuffmanArrayWord {
             String decodeString = "";
 
             while (scanner.hasNext()) {
-                String code = scanner.next();
-                System.out.println(code);
-                decodeString += encodeMap.get(code);
+                String[] line = scanner.nextLine().split(" ");
+                for (int i = 0; i < line.length; i++) {
+                    if (i == line.length - 1) {
+                        decodeString += encodeMap.get(line[i]);
+                    } else {
+                        decodeString += encodeMap.get(line[i]) + " ";
+                    }
+                }
+                decodeString += "\n";
             }
 
             File outFile = new File(outputFileName);
@@ -175,7 +180,6 @@ public class HuffmanArrayWord {
         }
     }
 
-    
     public void createDecodeMap(String decodeFile) {
         try {
             File file = new File(decodeFile);
