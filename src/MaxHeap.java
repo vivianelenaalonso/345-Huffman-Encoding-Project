@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class PriorityQueue {
+public class MaxHeap {
 
     private ArrayList<Node> heap;
 
-    public PriorityQueue() {
+    public MaxHeap() {
         heap = new ArrayList<Node>();
 
     }
@@ -12,7 +12,7 @@ public class PriorityQueue {
     public void add(Node n){
         heap.add(n);
         int current = heap.size()-1;
-        while (heap.get(current).frequency < heap.get(getParent(current)).frequency){
+        while (heap.get(current).frequency > heap.get(getParent(current)).frequency){
             swap(current,getParent(current));
             current = getParent(current);}
 
@@ -22,7 +22,7 @@ public class PriorityQueue {
         Node n = new Node(frequency, element);
         heap.add(n);
         int current = heap.size()-1;
-        while (heap.get(current).frequency < heap.get(getParent(current)).frequency){
+        while (heap.get(current).frequency > heap.get(getParent(current)).frequency){
             swap(current,getParent(current));
             current = getParent(current);}
     }
@@ -44,10 +44,10 @@ public class PriorityQueue {
         int current = 0;
         while (leftChild(current) < heap.size()){
             int smallerChild = leftChild(current);
-            if (rightChild(current) < heap.size() && heap.get(rightChild(current)).frequency < heap.get(leftChild(current)).frequency){
+            if (rightChild(current) < heap.size() && heap.get(rightChild(current)).frequency > heap.get(leftChild(current)).frequency){
                 smallerChild = rightChild(current);
             }
-            if (heap.get(current).frequency < heap.get(smallerChild).frequency){
+            if (heap.get(current).frequency > heap.get(smallerChild).frequency){
                 break;
             }
             else{
