@@ -26,5 +26,9 @@ public class Node {
 		left = null;
 		right = null;
 	}
+
+	public String toString() {
+		return word + " : " + frequency;
+	}
 	
 }
