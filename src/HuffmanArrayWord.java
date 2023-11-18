@@ -104,9 +104,17 @@ public class HuffmanArrayWord {
             File inputFile = new File(inputFileName);
             Scanner scanner = new Scanner(inputFile);
 
-            while (scanner.hasNext()) {
-                String word = scanner.next();
-                stringBuilder += encodeMap.get(word);
+            while (scanner.hasNextLine()) {
+                String[] line = scanner.nextLine().split(" ");
+
+                for(int i = 0; i < line.length; i++) {
+                    if (i == line.length - 1) {
+                        stringBuilder += encodeMap.get(line[i]);
+                    } else {
+                        stringBuilder += encodeMap.get(line[i]) + " ";
+                    }
+                }
+                stringBuilder += "\n";
             }
 
             File outputFile = new File(outputFileName);
