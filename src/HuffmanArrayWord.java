@@ -7,6 +7,7 @@ import java.util.PriorityQueue;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class HuffmanArrayWord {
             System.out.println("Encoding " + inputFileName);
             encode(inputFileName, inputFileName + ".huf");
         } else if (cmd == 1) {
-            decode(inputFileName, inputFileName + ".dec");
+            decode(inputFileName, inputFileName + ".dec", "decode.txt");
         } else {
             System.out.println("Invalid command");
         }
@@ -61,7 +62,27 @@ public class HuffmanArrayWord {
 
         // Write to output file
         writeOutputFile(inputFileName, outputFileName, encodeMap);
+        
+        // Write decode file
+        writeDecodeFile(encodeMap, "decode.txt");
+    }
 
+    private void writeDecodeFile(HashMap<String, String> encodeMap2, String fileName) {
+        try {
+            File file = new File(fileName);
+            file.createNewFile();
+
+            FileWriter writer = new FileWriter(file);
+
+            for (Map.Entry<String, String> entry : encodeMap2.entrySet()) {
+                writer.write(entry.getKey() + " " + entry.getValue() + "\n");
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error creating file");
+            e.printStackTrace();
+        }
     }
 
     // Takes an array of words and maps them to binary strings that represent their
@@ -110,8 +131,59 @@ public class HuffmanArrayWord {
 
 
     // Decodes input file and writes to output file
-    public void decode(String inputFileName, String outputFileName) {
+    public void decode(String inputFileName, String outputFileName, String decodeFile) {
 
+        createDecodeMap(decodeFile);
+
+        try {
+            File inFile = new File(inputFileName);
+            Scanner scanner = new Scanner(inFile);
+            String decodeString = "";
+
+            while (scanner.hasNext()) {
+                String code = scanner.next();
+                System.out.println(code);
+                decodeString += encodeMap.get(code);
+            }
+
+            File outFile = new File(outputFileName);
+
+            try {
+                outFile.createNewFile();
+
+                FileWriter writer = new FileWriter(outFile);
+                writer.write(decodeString);
+                writer.close();
+
+            } catch (IOException e) {
+                System.out.println("Error creating file");
+                e.printStackTrace();
+            }
+
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(inputFileName + " not found");
+            e.printStackTrace();
+        }
+    }
+
+    
+    public void createDecodeMap(String decodeFile) {
+        try {
+            File file = new File(decodeFile);
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNext()) {
+                String word = scanner.next();
+                String code = scanner.next();
+                encodeMap.put(code, word);
+            }
+
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(decodeFile + " not found");
+            e.printStackTrace();
+        }
     }
 
     // Prints priority queue
