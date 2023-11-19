@@ -1,3 +1,7 @@
+// file name: Node.java
+// authors: elodie hilbert, vivian alonso
+// description: node class used for trees
+
 
 public class Node {
 
@@ -7,6 +11,7 @@ public class Node {
 	public Node left;
 	public Node right;
 	
+	// Node for Character based Huffman Tree
 	public Node(int data, char c) {
 		frequency = data;
 		character = c;
