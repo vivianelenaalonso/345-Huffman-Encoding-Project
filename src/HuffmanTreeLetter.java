@@ -144,7 +144,7 @@ public class HuffmanTreeLetter {
 	
 	private void printEncoding(Node node, String output) {
 		if (node.left == null && node.right == null) {
-		      System.out.println(node.character + "   |  " + output);
+		      System.out.println(node.character + ":" + output);
 		      codes.put(node.character, output);
 		      return;
 		    }
