@@ -9,6 +9,8 @@ public class HuffmanTreeLetter {
 	public HashMap<Character, Integer> frequency;
 	public HashMap<Character, String> codesDecode;
 	public HashMap<Character, String> codes;
+	public String encodedStr;
+	public Node root;
 	
 	public HuffmanTreeLetter() {
 		pQueue = new PriorityQueue();
@@ -29,7 +31,7 @@ public class HuffmanTreeLetter {
 		}
 		
 		// create tree
-		Node root = null;
+		root = null;
 		while (pQueue.size() > 1) {
 			Node left = pQueue.pop();
 			Node right = pQueue.pop();
@@ -45,6 +47,7 @@ public class HuffmanTreeLetter {
 	}
 	
 	private void printEncodedText(String textFile) {
+		encodedStr = "";
 		Scanner fileScan = null;
 		try {
 			fileScan = new Scanner(new File(textFile));
@@ -59,62 +62,31 @@ public class HuffmanTreeLetter {
 				String line = fileScan.nextLine();
 				line = line.toLowerCase();
 				for (int i = 0; i < line.length(); i++) {
-					if (i % 20 != 0) {
-						System.out.print(codes.get(line.charAt(i)));
-					} else {
-						System.out.println(codes.get(line.charAt(i)));
-					}
-					
+					System.out.print(codes.get(line.charAt(i)));
+					encodedStr += codes.get(line.charAt(i));
 				}
 			}
+			System.out.println();
 		}
 		
 	}
 
-	public void decode(String codedTextFile, String codesFile) {
-		codesDecode = new HashMap<>();
-		readFileCreateCodes(codesFile);
-		Scanner fileScan = null;
-		try {
-			fileScan = new Scanner(new File(codedTextFile));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (fileScan == null) {
-			System.out.println("File does not exist");
-		} else {
-			while (fileScan.hasNext()) {
-				String line = fileScan.nextLine();
-				line = line.toLowerCase();
-				for (int i = 0; i < line.length(); i++) {
-					System.out.println(line.charAt(i));
-					System.out.print(codes.get(line.charAt(i)));
-				}
+	public void decode() {
+		Node curr = root;
+		for (int i = 0; i < encodedStr.length(); i++) {
+			if (encodedStr.charAt(i) == '0') {
+				curr = curr.left;
+			} else {
+				curr = curr.right;
+			}
+			
+			if (curr.left == null && curr.right == null) {
+				System.out.print(curr.character);
+				curr = root;
 			}
 		}
 	}
-	
-	private void readFileCreateCodes(String codesFile) {
-		Scanner fileScan = null;
-		try {
-			fileScan = new Scanner(new File(codesFile));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (fileScan == null) {
-			System.out.println("File does not exist");
-		} else {
-			while (fileScan.hasNext()) {
-				String line = fileScan.nextLine();
-				String[] lineArr = line.split("|", 3);
-				codes.put(lineArr[0].charAt(0), lineArr[2]);
-			}
-		}
-		System.out.println(codes);
-		
-	}
+
 
 	private void readFileFindFrequency(String textFile) {
 		Scanner fileScan = null;
@@ -152,6 +124,7 @@ public class HuffmanTreeLetter {
 		    printEncoding(node.left, output + "0");
 		    printEncoding(node.right, output + "1");
 	}
+	
 	
 	
 }
