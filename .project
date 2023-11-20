@@ -16,24 +16,34 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>src/WordExample.txt</name>
+			<name>TreeWordEmptyFile.txt</name>
+			<type>1</type>
+			<location>C:/Users/user/Downloads/TreeWordEmptyFile.txt</location>
+		</link>
+		<link>
+			<name>TreeWordNoRepeats.txt</name>
+			<type>1</type>
+			<location>C:/Users/user/Downloads/TreeWordNoRepeats.txt</location>
+		</link>
+		<link>
+			<name>WordAlliterationLong.txt</name>
+			<type>1</type>
+			<location>C:/Users/user/Downloads/WordAlliterationLong.txt</location>
+		</link>
+		<link>
+			<name>src/SingleWordRepeat.txt</name>
+			<type>1</type>
+			<location>C:/Users/user/Downloads/SingleWordRepeat.txt</location>
+		</link>
+		<link>
+			<name>src/TreeWordManyRepeats.txt</name>
+			<type>1</type>
+			<location>C:/Users/user/Downloads/TreeWordManyRepeats.txt</location>
+		</link>
+		<link>
+			<name>src/WordAlliterationShort.txt</name>
 			<type>1</type>
 			<location>C:/Users/user/Documents/gitrepos/345-Huffman-Encoding-Project/WordExample.txt</location>
-		</link>
-		<link>
-			<name>src/WordExample2.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Documents/gitrepos/345-Huffman-Encoding-Project/WordExample2.txt</location>
-		</link>
-		<link>
-			<name>src/WordExample3.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Documents/gitrepos/345-Huffman-Encoding-Project/WordExample3.txt</location>
-		</link>
-		<link>
-			<name>src/WordExample4.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Documents/gitrepos/345-Huffman-Encoding-Project/WordExample4.txt</location>
 		</link>
 	</linkedResources>
 	<filteredResources>

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 // file name: HuffmanTest.java
-// author: elodie hilbert
+// author: elodie hilbert, vivian alonso
 // description: console based test program for our huffman encoding implementations.
 
 public class HuffmanTest {
@@ -39,7 +39,7 @@ public class HuffmanTest {
 			}
 		} else if (impl.equals("Tree") && type.equals("Word")) {
 			HuffmanTreeWord huffman = new HuffmanTreeWord();
-			huffman.encode(file);
+			huffman.readFile(file);
 			System.out.println("Would you like to decode?");
 			String decode = scan.nextLine();
 			if (decode.equalsIgnoreCase("yes")) {
