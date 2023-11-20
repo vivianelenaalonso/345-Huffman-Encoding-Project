@@ -14,13 +14,13 @@ public class HuffmanArrayWordTest {
         huffman2 = new HuffmanArrayWord("src\\testHffArrWrdTest.txt.huf", 1);
         huffman2.printEncodeMap();
 
-        /*
+        
         HuffmanArrayWord beeMovie;
-        beeMovie = new HuffmanArrayWord("src\\beemovie.txt", 0);
-        // beeMovie.printWordMap();
+        beeMovie = new HuffmanArrayWord("src\\testBeeMovie.txt", 0);
+        beeMovie.printEncodeMap();
 
         HuffmanArrayWord macbeth;
-        macbeth = new HuffmanArrayWord("src\\macbeth.txt", 0);
-        */
+        macbeth = new HuffmanArrayWord("src\\testMacbeth.txt", 0);
+        macbeth.printEncodeMap();
     }
 }   

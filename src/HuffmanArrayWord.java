@@ -1,6 +1,6 @@
 /*  File: HuffmanArrayWord.java
  *  Author: Kevin Li
- *  Purpose: 
+ *  Purpose: Complete Huffman encoding by word using an array implementation
  */
 
 import java.util.PriorityQueue;
@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -19,7 +18,6 @@ public class HuffmanArrayWord {
     private HashMap<String, Integer> wordMap;
     private HashMap<String, String> encodeMap;
     private PriorityQueue<Map.Entry<String, Integer>> pq;
-
     private int wordCount;
 
     public HuffmanArrayWord(String inputFileName, int cmd) {
