@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "HuffmanArrayWordTest",
+            "request": "launch",
+            "mainClass": "HuffmanArrayWordTest",
+            "projectName": "345-Huffman-Encoding-Project"
+        },
+        {
+            "type": "java",
+            "name": "HuffmanTest",
+            "request": "launch",
+            "mainClass": "HuffmanTest",
+            "projectName": "345-Huffman-Encoding-Project"
+        },
+        {
+            "type": "java",
+            "name": "TreeWordTest",
+            "request": "launch",
+            "mainClass": "TreeWordTest",
+            "projectName": "345-Huffman-Encoding-Project"
+        },
+        {
+            "type": "java",
+            "name": "codeTesting",
+            "request": "launch",
+            "mainClass": "codeTesting",
+            "projectName": "345-Huffman-Encoding-Project"
+        }
+    ]
+}
