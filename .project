@@ -14,6 +14,28 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/WordExample.txt</name>
+			<type>1</type>
+			<location>C:/Users/user/Documents/gitrepos/345-Huffman-Encoding-Project/WordExample.txt</location>
+		</link>
+		<link>
+			<name>src/WordExample2.txt</name>
+			<type>1</type>
+			<location>C:/Users/user/Documents/gitrepos/345-Huffman-Encoding-Project/WordExample2.txt</location>
+		</link>
+		<link>
+			<name>src/WordExample3.txt</name>
+			<type>1</type>
+			<location>C:/Users/user/Documents/gitrepos/345-Huffman-Encoding-Project/WordExample3.txt</location>
+		</link>
+		<link>
+			<name>src/WordExample4.txt</name>
+			<type>1</type>
+			<location>C:/Users/user/Documents/gitrepos/345-Huffman-Encoding-Project/WordExample4.txt</location>
+		</link>
+	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1699407501259</id>
