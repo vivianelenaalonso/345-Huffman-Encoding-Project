@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 // author: elodie hilbert
@@ -22,7 +24,7 @@ public class HuffmanTreeLetter {
 	}
 	
 	// creates the encoding
-	public void encode(String textFile) {
+	public void encode(String textFile, String outputFile) {
 		frequency = new HashMap<>();
 		pQueue = new PriorityQueue();
 		readFileFindFrequency(textFile); // read in file and create hashmap
@@ -47,6 +49,7 @@ public class HuffmanTreeLetter {
 		
 		printEncoding(root, "");
 		printEncodedText(textFile);
+		writeEncodingToFile(outputFile);
 	}
 	
 	// prints out the encoded version of the given text file
@@ -132,6 +135,31 @@ public class HuffmanTreeLetter {
 
 		    printEncoding(node.left, output + "0");
 		    printEncoding(node.right, output + "1");
+	}
+	
+	/**
+	 * Writes the encoded text to an output file. 
+	 * 
+	 * @param String Input file to write to.
+	 * @param String Output file to write to.
+	 * @param Map<String, String> Huffman codes map.
+	 */
+	public void writeEncodingToFile(String outputFileName) {
+		Scanner scan = new Scanner(System.in);
+        File outputFile = new File(outputFileName);
+        try {
+            outputFile.createNewFile();
+
+            FileWriter writer = new FileWriter(outputFile);
+            writer.write(encodedStr);
+            writer.close();
+
+        } catch (Exception e) {
+            System.out.println("Error creating file.");
+            e.printStackTrace();
+        }
+
+        scan.close();
 	}
 	
 	
