@@ -89,13 +89,19 @@ public class HuffmanArrayLetter {
         while (temp.size() > 2) {
             Node left = temp.pop();
             Node internal = new Node(frequency, "internal");
-            heap.set(index, internal);
-            heap.set(index*2+1, left);
+            if (internal.frequency > left.frequency) {
+                heap.set(index, left);
+                heap.set(index*2+1, internal);
+            }
+            else {
+                heap.set(index, internal);
+                heap.set(index*2+1, left);
+            }
             index = index*2+2;
             frequency -= left.frequency;
         }
-        Node left = temp.pop();
         Node right = temp.pop();
+        Node left = temp.pop();
         Node internal = new Node(frequency, "internal");
         heap.set(index, internal);
         heap.set(index*2+1, left);
