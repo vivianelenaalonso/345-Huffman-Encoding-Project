@@ -28,6 +28,10 @@ public class HuffmanTreeLetter {
 		pQueue = new PriorityQueue();
 		readFileFindFrequency(textFile); // read in file and create hashmap
 
+		if (frequency.isEmpty()) {
+			return;
+		}
+		
 		// add nodes to priority queue
 		for (Character key : frequency.keySet()) {
 			Node node = new Node(frequency.get(key), key);
@@ -70,6 +74,10 @@ public class HuffmanTreeLetter {
 				for (int i = 0; i < line.length(); i++) { // for each char find code and print
 					System.out.print(codes.get(line.charAt(i)));
 					encodedStr += codes.get(line.charAt(i)); // create a str with encoded text for decoding
+					if (i == line.length() - 1) {
+						System.out.println();
+						encodedStr += '\n';
+					}
 				}
 			}
 			System.out.println();
@@ -81,11 +89,17 @@ public class HuffmanTreeLetter {
 	// starting back at the root once one is found
 	public void decode() {
 		Node curr = root;
+		if (frequency.isEmpty()) {
+			System.out.println("Empty File");
+			return;
+		}
 		for (int i = 0; i < encodedStr.length(); i++) {
 			if (encodedStr.charAt(i) == '0') { // go left
 				curr = curr.left;
-			} else { // go right
+			} else if (encodedStr.charAt(i) == '1'){ // go right
 				curr = curr.right;
+			} else if (encodedStr.charAt(i) == '\n'){
+				System.out.println();
 			}
 
 			if (curr.left == null && curr.right == null) { // found leaf
@@ -109,6 +123,10 @@ public class HuffmanTreeLetter {
 		if (fileScan == null) {
 			System.out.println("File does not exist");
 		} else {
+			if(!fileScan.hasNext()) {
+				System.out.println("Empty File");
+				return;
+			}
 			while (fileScan.hasNext()) {
 				String line = fileScan.nextLine();
 				line = line.toLowerCase();
