@@ -28,9 +28,9 @@ public class HuffmanArrayWord {
 
         if (cmd == 0) {
             System.out.println("Encoding " + inputFileName);
-            encode(inputFileName, inputFileName + ".huf");
+            encode(inputFileName, "huf_" + inputFileName);
         } else if (cmd == 1) {
-            decode(inputFileName, inputFileName + ".dec", "decode.txt");
+            decode(inputFileName, "dec_" + inputFileName, "decode.txt");
         } else {
             System.out.println("Invalid command");
         }
@@ -50,10 +50,10 @@ public class HuffmanArrayWord {
 
         // Create Huffman Array
         huffmanArr = new String[pq.size()];
-        int index = 0;
+        int index = wordMap.size() - 1;
         while (pq.size() != 0) {
             huffmanArr[index] = pq.poll().getKey();
-            index++;
+            index--;
         }
 
         createEncode(huffmanArr);
@@ -89,7 +89,7 @@ public class HuffmanArrayWord {
         int binarySize = (int) Math.ceil(Math.log(arr.length) / Math.log(2));
 
         for (int i = 0; i < arr.length; i++) {
-            encodeMap.put(arr[i], String.format("%" + binarySize + "s", Integer.toBinaryString(i)).replace(' ', '0'));
+            encodeMap.put(arr[i], String.format("%s", Integer.toBinaryString(i)).replace(' ', '0'));
         }
     }
 
