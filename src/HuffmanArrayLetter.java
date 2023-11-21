@@ -1,10 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 
 public class HuffmanArrayLetter {
@@ -39,15 +39,15 @@ public class HuffmanArrayLetter {
                 String line = file.nextLine();
                 totalline += line;
                 char[] letters = line.toCharArray();
-                for (int i = 0; i < letters.length; i++) {
-                    if (frequencyMap.containsKey(String.valueOf(letters[i]))) {
-                        frequencyMap.put(String.valueOf(letters[i]), frequencyMap.get(String.valueOf(letters[i])) + 1);
+                for (char letter : letters) {
+                    if (frequencyMap.containsKey(String.valueOf(letter))) {
+                        frequencyMap.put(String.valueOf(letter), frequencyMap.get(String.valueOf(letter)) + 1);
                     }
                     else {
-                        frequencyMap.put(String.valueOf(letters[i]), 1);
+                        frequencyMap.put(String.valueOf(letter), 1);
                     }
                 }
-                
+
                 }
             file.close();
             createPriorityQueue();
@@ -62,9 +62,9 @@ public class HuffmanArrayLetter {
             catch (FileNotFoundException exception) {
             System.out.println("File was not found.");
             exception.printStackTrace();
-            
+
         }
-        
+
         }
 
     public void createPriorityQueue(){
@@ -85,7 +85,7 @@ public class HuffmanArrayLetter {
     public void createHuffmanTree(){
         int index = 0;
         //create the initial array, which is size #of nodes * 2 - 1
-        heap = new ArrayList<Node>(Arrays.asList(new Node[priorityQueue.size()*priorityQueue.size()]));
+        heap = new ArrayList<>(Arrays.asList(new Node[priorityQueue.size()*priorityQueue.size()]));
         while (temp.size() > 2) {
             Node left = temp.pop();
             Node internal = new Node(frequency, "internal");
@@ -111,7 +111,7 @@ public class HuffmanArrayLetter {
             createHuffmanMap(code + "0", 2*index + 1);
             createHuffmanMap(code + "1", 2*index + 2);
         }
-        
+
     }
 
     public void createHuffmanCodes(String line){

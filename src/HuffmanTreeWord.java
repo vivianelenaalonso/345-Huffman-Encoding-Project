@@ -1,15 +1,14 @@
 /**
 * @author Vivian Elena Alonso
-* @purpose Huffman Encoding by word frequency using a tree structure. 
+* @purpose Huffman Encoding by word frequency using a tree structure.
 */
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class HuffmanTreeWord {
 	private PriorityQueue priorityQueue;
@@ -29,7 +28,7 @@ public class HuffmanTreeWord {
 
 	/**
 	 * Collects the file name from keyboard and organizes the lines of data.
-	 * 
+	 *
 	 * @param fileName String name of the the file to read from.
 	 */
 	public  void readFile(String fileName) {
@@ -43,12 +42,12 @@ public class HuffmanTreeWord {
 				fileText.append(" ");
 				// List of words
 				String[] words = sentence.split(" ");
-				for (int index = 0; index < words.length; index++) {
+				for (String word : words) {
 					// Add the words to a frequency map
-					if (frequencyMap.containsKey(words[index])) {
-						frequencyMap.put(words[index], frequencyMap.get(words[index]) + 1);
+					if (frequencyMap.containsKey(word)) {
+						frequencyMap.put(word, frequencyMap.get(word) + 1);
 					} else {
-						frequencyMap.put(words[index], 1);
+						frequencyMap.put(word, 1);
 					}
 				}
 			}
@@ -67,7 +66,7 @@ public class HuffmanTreeWord {
 
 	/**
 	 * Encodes the given string.
-	 * 
+	 *
 	 * @param text
 	 */
 	public void huffmanEncode(String text) {
@@ -103,7 +102,7 @@ public class HuffmanTreeWord {
 
 	/**
 	 * Generates the huffman codes.
-	 * 
+	 *
 	 * @param node         Root node.
 	 * @param code         Code string for each Node.
 	 * @param huffmanCodes Map of the words and their Huffman codes.
@@ -121,7 +120,7 @@ public class HuffmanTreeWord {
 
 	/**
 	 * Uses the word frequency from the priority queue to build a Huffman Tree.
-	 * 
+	 *
 	 * @return the Huffman Tree Root Node.
 	 */
 	public Node buildTree() {
@@ -169,16 +168,16 @@ public class HuffmanTreeWord {
 		}
 		return null;
 	}
-	
+
 	/**
-	 * Writes the encoded text to an output file. 
-	 * 
+	 * Writes the encoded text to an output file.
+	 *
 	 * @param String Input file to write to.
 	 * @param String Output file to write to.
 	 * @param Map<String, String> Huffman codes map.
 	 */
 	public void writeEncodingToFile(String inputFileName, String outputFileName, Map<String, String> huffmanCodes) {
-        // Very similar to Kevin's because he initially had the idea to write the encoding to file. 
+        // Very similar to Kevin's because he initially had the idea to write the encoding to file.
 		try {
             String stringBuilder = "";
 
@@ -230,7 +229,7 @@ public class HuffmanTreeWord {
 
 	/**
 	 * Prints the created tree in in-order traversal.
-	 * 
+	 *
 	 * @param node Root node of the tree created.
 	 */
 	public void printTree(Node node) {
@@ -243,7 +242,7 @@ public class HuffmanTreeWord {
 
 	/**
 	 * Prints the encoded text.
-	 * 
+	 *
 	 */
 	public void printEncode() {
 		String eText = encodedText.toString().trim();
@@ -253,7 +252,7 @@ public class HuffmanTreeWord {
 
 	/**
 	 * Prints the decoded text.
-	 * 
+	 *
 	 */
 	public void printDecode() {
 		String eText = decodedText.toString().trim();

@@ -3,13 +3,13 @@
  *  Purpose: Complete Huffman encoding by word using an array implementation
  */
 
-import java.util.PriorityQueue;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class HuffmanArrayWord {
@@ -22,8 +22,8 @@ public class HuffmanArrayWord {
 
     public HuffmanArrayWord(String inputFileName, int cmd) {
         huffmanArr = new String[256];
-        wordMap = new HashMap<String, Integer>();
-        encodeMap = new HashMap<String, String>();
+        wordMap = new HashMap<>();
+        encodeMap = new HashMap<>();
         wordCount = 0;
 
         if (cmd == 0) {

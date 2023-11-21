@@ -8,23 +8,23 @@ public class HuffmanTest {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		
+
 		System.out.println("Enter file name to encode: ");
-		
+
 		String file = scan.nextLine();
-		
+
 		System.out.println("Enter file name to write encoding to: ");
-		
+
 		String outputFile = scan.nextLine();
-		
+
 		System.out.println("Array or Tree based encoding?");
-		
+
 		String impl = scan.nextLine();
-		
+
 		System.out.println("Word or Letter based encoding?");
-		
+
 		String type = scan.nextLine();
-		
+
 		if (impl.equals("Array") && type.equals("Word")) {
 			HuffmanArrayWord huffman = new HuffmanArrayWord();
 			huffman.encode(file);
@@ -61,6 +61,6 @@ public class HuffmanTest {
 
 	}
 
-	
-	
+
+
 }
