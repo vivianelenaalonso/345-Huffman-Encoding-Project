@@ -44,10 +44,11 @@ public class HuffmanTest {
 		} else if (impl.equals("Tree") && type.equals("Word")) {
 			HuffmanTreeWord huffman = new HuffmanTreeWord();
 			huffman.readFile(file);
+			huffman.writeEncodeToFile(outputFile);
 			System.out.println("Would you like to decode?");
 			String decode = scan.nextLine();
 			if (decode.equalsIgnoreCase("yes")) {
-				huffman.decode();
+				huffman.huffmanDecode();
 			}
 		} else if (impl.equals("Tree") && type.equals("Letter")) {
 			HuffmanTreeLetter huffman = new HuffmanTreeLetter();

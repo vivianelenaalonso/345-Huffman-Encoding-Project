@@ -93,7 +93,7 @@ public class HuffmanTreeWord {
 	 * @param encodedText String of encoded text.
 	 * @param writeEncodeFile Output file to write to.
 	 */
-	public void writeEncodeToFile(String encodedText, String writeEncodeFile) {
+	public void writeEncodeToFile(String writeEncodeFile) {
 		// Write encoding to a file
         try {
             File outputFile = new File(writeEncodeFile);
