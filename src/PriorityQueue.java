@@ -1,3 +1,5 @@
+// author(s): stephen pan, vivian alonso
+
 import java.util.ArrayList;
 
 public class PriorityQueue {

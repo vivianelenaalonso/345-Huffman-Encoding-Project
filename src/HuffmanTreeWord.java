@@ -17,6 +17,7 @@ public class HuffmanTreeWord {
 	private Map<String, String> huffmanCodes;
 	private StringBuilder encodedText;
 	private StringBuilder decodedText;
+	private String writeEncodeFile;
 
 	/**
 	 * Constructor
@@ -56,7 +57,7 @@ public class HuffmanTreeWord {
 			makeEncoding();
 			// Print debug
 			printCodes();
-			huffmanEncode(fileText.toString().trim());
+			huffmanEncode(fileText.toString().trim(), writeEncodeFile);
 			// Print debug
 			printEncode();
 		} catch (FileNotFoundException exception) {
@@ -70,7 +71,7 @@ public class HuffmanTreeWord {
 	 * 
 	 * @param text
 	 */
-	public void huffmanEncode(String text) {
+	public void huffmanEncode(String text, String writeEncodeFile) {
 		encodedText = new StringBuilder();
 		String[] words = text.split(" ");
 		for (String word : words) {
@@ -83,6 +84,22 @@ public class HuffmanTreeWord {
 				encodedText.append(" ");
 			}
 		}
+		
+		// Write encoding to a file
+        try {
+            File outputFile = new File(writeEncodeFile);
+            outputFile.createNewFile();
+
+            FileWriter writer = new FileWriter(outputFile);
+            writer.write(encodedText.toString().trim());
+            writer.close();
+
+            System.out.println("Encoded text has been written to: " + writeEncodeFile);
+
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + writeEncodeFile);
+            e.printStackTrace();
+        }
 	}
 
 	/**
@@ -171,49 +188,60 @@ public class HuffmanTreeWord {
 	}
 	
 	/**
-	 * Writes the encoded text to an output file. 
-	 * 
-	 * @param String Input file to write to.
-	 * @param String Output file to write to.
-	 * @param Map<String, String> Huffman codes map.
+	 * This method takes a file, decodes it, and writes it
+	 * to an output file.
 	 */
-	public void writeEncodingToFile(String inputFileName, String outputFileName, Map<String, String> huffmanCodes) {
-        // Very similar to Kevin's because he initially had the idea to write the encoding to file. 
+	public void decodeFile(String decodeFile, String inputFileName, String outputFileName) {
 		try {
-            String stringBuilder = "";
+            File file = new File(decodeFile);
+            Scanner scanner = new Scanner(file);
 
-            File inputFile = new File(inputFileName);
-            Scanner scanner = new Scanner(inputFile);
-
-            while (scanner.hasNextLine()) {
-                String[] line = scanner.nextLine().split(" ");
-
-                for (int i = 0; i < line.length; i++) {
-                    if (i == line.length - 1) {
-                        stringBuilder += huffmanCodes.get(line[i]);
-                    } else {
-                        stringBuilder += huffmanCodes.get(line[i]) + " ";
-                    }
-                }
-                stringBuilder += "\n";
+            while (scanner.hasNext()) {
+                String word = scanner.next();
+                String code = scanner.next();
+                huffmanCodes.put(code, word);
             }
 
-            File outputFile = new File(outputFileName);
-            try {
-                outputFile.createNewFile();
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(decodeFile + " not found");
+            e.printStackTrace();
+        }
+		
+        try {
+            File inFile = new File(inputFileName);
+            Scanner scanner = new Scanner(inFile);
+            String decodeString = "";
 
-                FileWriter writer = new FileWriter(outputFile);
-                writer.write(stringBuilder);
+            while (scanner.hasNext()) {
+                String[] line = scanner.nextLine().split(" ");
+                for (int i = 0; i < line.length; i++) {
+                    if (i == line.length - 1) {
+                        decodeString += huffmanCodes.get(line[i]);
+                    } else {
+                        decodeString += huffmanCodes.get(line[i]) + " ";
+                    }
+                }
+                decodeString += "\n";
+            }
+
+            File outFile = new File(outputFileName);
+
+            try {
+                outFile.createNewFile();
+
+                FileWriter writer = new FileWriter(outFile);
+                writer.write(decodeString);
                 writer.close();
 
-            } catch (Exception e) {
-                System.out.println("Error creating file.");
+            } catch (IOException e) {
+                System.out.println("Error creating file");
                 e.printStackTrace();
             }
 
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println(inputFileName + " not found.");
+            System.out.println(inputFileName + " not found");
             e.printStackTrace();
         }
 	}
