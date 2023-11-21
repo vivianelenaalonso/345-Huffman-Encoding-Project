@@ -18,32 +18,32 @@
 		<link>
 			<name>TreeWordEmptyFile.txt</name>
 			<type>1</type>
-			<location>C:/Users/user/Downloads/TreeWordEmptyFile.txt</location>
+			<location>/Applications/Eclipse.app/Contents/MacOS/C::/Users/user/Downloads/TreeWordEmptyFile.txt</location>
 		</link>
 		<link>
 			<name>TreeWordNoRepeats.txt</name>
 			<type>1</type>
-			<location>C:/Users/user/Downloads/TreeWordNoRepeats.txt</location>
+			<location>/Applications/Eclipse.app/Contents/MacOS/C::/Users/user/Downloads/TreeWordNoRepeats.txt</location>
 		</link>
 		<link>
 			<name>WordAlliterationLong.txt</name>
 			<type>1</type>
-			<location>C:/Users/user/Downloads/WordAlliterationLong.txt</location>
+			<location>/Applications/Eclipse.app/Contents/MacOS/C::/Users/user/Downloads/WordAlliterationLong.txt</location>
 		</link>
 		<link>
 			<name>src/SingleWordRepeat.txt</name>
 			<type>1</type>
-			<location>C:/Users/user/Downloads/SingleWordRepeat.txt</location>
+			<location>/Applications/Eclipse.app/Contents/MacOS/C::/Users/user/Downloads/SingleWordRepeat.txt</location>
 		</link>
 		<link>
 			<name>src/TreeWordManyRepeats.txt</name>
 			<type>1</type>
-			<location>C:/Users/user/Downloads/TreeWordManyRepeats.txt</location>
+			<location>/Applications/Eclipse.app/Contents/MacOS/C::/Users/user/Downloads/TreeWordManyRepeats.txt</location>
 		</link>
 		<link>
 			<name>src/WordAlliterationShort.txt</name>
 			<type>1</type>
-			<location>C:/Users/user/Documents/gitrepos/345-Huffman-Encoding-Project/WordExample.txt</location>
+			<location>/Applications/Eclipse.app/Contents/MacOS/C::/Users/user/Documents/gitrepos/345-Huffman-Encoding-Project/WordExample.txt</location>
 		</link>
 	</linkedResources>
 	<filteredResources>
