@@ -68,6 +68,7 @@ public class HuffmanArrayWord {
     writeDecodeFile(encodeMap, "decode.txt");
   }
 
+  // Creates a code file that holds the key and binary value pairings of the Huffman encoding
   private void writeDecodeFile(
     HashMap<String, String> encodeMap2,
     String fileName
