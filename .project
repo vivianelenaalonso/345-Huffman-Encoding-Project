@@ -16,34 +16,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>TreeWordEmptyFile.txt</name>
+			<name>files/TreeWordMixedLong.txt</name>
 			<type>1</type>
-			<location>C:/Users/user/Downloads/TreeWordEmptyFile.txt</location>
+			<location>C:/Users/user/Downloads/TreeWordMixedLong.txt</location>
 		</link>
 		<link>
-			<name>TreeWordNoRepeats.txt</name>
+			<name>files/WordTreeSymbols.txt</name>
 			<type>1</type>
-			<location>C:/Users/user/Downloads/TreeWordNoRepeats.txt</location>
-		</link>
-		<link>
-			<name>WordAlliterationLong.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/WordAlliterationLong.txt</location>
-		</link>
-		<link>
-			<name>src/SingleWordRepeat.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/SingleWordRepeat.txt</location>
-		</link>
-		<link>
-			<name>src/TreeWordManyRepeats.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/TreeWordManyRepeats.txt</location>
-		</link>
-		<link>
-			<name>src/WordAlliterationShort.txt</name>
-			<type>1</type>
-			<location>C:/Users/user/Downloads/WordAlliterationShort.txt</location>
+			<location>C:/Users/user/Downloads/WordTreeSymbols.txt</location>
 		</link>
 	</linkedResources>
 	<filteredResources>

@@ -57,8 +57,9 @@ public class HuffmanTreeWord {
 			makeEncoding();
 			// Print debug
 			printCodes();
-			huffmanEncode(fileText.toString().trim(), writeEncodeFile);
+			huffmanEncode(fileText.toString().trim());
 			// Print debug
+			System.out.println();
 			printEncode();
 		} catch (FileNotFoundException exception) {
 			System.out.println("File was not found.");
@@ -71,7 +72,7 @@ public class HuffmanTreeWord {
 	 * 
 	 * @param text
 	 */
-	public void huffmanEncode(String text, String writeEncodeFile) {
+	public void huffmanEncode(String text) {
 		encodedText = new StringBuilder();
 		String[] words = text.split(" ");
 		for (String word : words) {
@@ -84,7 +85,15 @@ public class HuffmanTreeWord {
 				encodedText.append(" ");
 			}
 		}
-		
+	}
+	
+	/**
+	 * Writes the huffman encoded string to an output file. 
+	 * 
+	 * @param encodedText String of encoded text.
+	 * @param writeEncodeFile Output file to write to.
+	 */
+	public void writeEncodeToFile(String encodedText, String writeEncodeFile) {
 		// Write encoding to a file
         try {
             File outputFile = new File(writeEncodeFile);
@@ -169,7 +178,6 @@ public class HuffmanTreeWord {
 				decodedText.append(decodedWord).append(" ");
 			}
 		}
-		printDecode();
 	}
 
 	/**

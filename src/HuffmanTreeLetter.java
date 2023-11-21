@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -13,26 +14,26 @@ public class HuffmanTreeLetter {
 	private HashMap<Character, String> codes;
 	private String encodedStr;
 	private Node root;
-	
+
 	// constructor
 	public HuffmanTreeLetter() {
 		pQueue = new PriorityQueue();
 		frequency = new HashMap<>();
 		codes = new HashMap<>();
 	}
-	
+
 	// creates the encoding
-	public void encode(String textFile) {
+	public void encode(String textFile, String outputFile) {
 		frequency = new HashMap<>();
 		pQueue = new PriorityQueue();
 		readFileFindFrequency(textFile); // read in file and create hashmap
-		
+
 		// add nodes to priority queue
 		for (Character key : frequency.keySet()) {
 			Node node = new Node(frequency.get(key), key);
 			pQueue.add(node);
 		}
-		
+
 		// create tree
 		root = null;
 		while (pQueue.size() > 1) {
@@ -44,11 +45,12 @@ public class HuffmanTreeLetter {
 			root = temp;
 			pQueue.add(temp);
 		}
-		
+
 		printEncoding(root, "");
 		printEncodedText(textFile);
+		writeEncodingToFile(outputFile);
 	}
-	
+
 	// prints out the encoded version of the given text file
 	private void printEncodedText(String textFile) {
 		encodedStr = "";
@@ -72,7 +74,7 @@ public class HuffmanTreeLetter {
 			}
 			System.out.println();
 		}
-		
+
 	}
 
 	// goes through the encoded string and looks for a leaf node with a char
@@ -85,7 +87,7 @@ public class HuffmanTreeLetter {
 			} else { // go right
 				curr = curr.right;
 			}
-			
+
 			if (curr.left == null && curr.right == null) { // found leaf
 				System.out.print(curr.character);
 				curr = root; // start over
@@ -95,7 +97,7 @@ public class HuffmanTreeLetter {
 
 
 	// this method reads in the file and adds each letter to a hashmap
-	// and increments the associated value however many times that letter 
+	// and increments the associated value however many times that letter
 	// is seen.
 	private void readFileFindFrequency(String textFile) {
 		Scanner fileScan = null;
@@ -119,9 +121,9 @@ public class HuffmanTreeLetter {
 				}
 			}
 		}
-		
+
 	}
-	
+
 	// recursively iterates through the tree and prints the code associated with each letter
 	private void printEncoding(Node node, String output) {
 		if (node.left == null && node.right == null) { // if lead node
@@ -133,7 +135,32 @@ public class HuffmanTreeLetter {
 		    printEncoding(node.left, output + "0");
 		    printEncoding(node.right, output + "1");
 	}
-	
-	
-	
+
+	/**
+	 * Writes the encoded text to an output file.
+	 *
+	 * @param String Input file to write to.
+	 * @param String Output file to write to.
+	 * @param Map<String, String> Huffman codes map.
+	 */
+	public void writeEncodingToFile(String outputFileName) {
+		Scanner scan = new Scanner(System.in);
+        File outputFile = new File(outputFileName);
+        try {
+            outputFile.createNewFile();
+
+            FileWriter writer = new FileWriter(outputFile);
+            writer.write(encodedStr);
+            writer.close();
+
+        } catch (Exception e) {
+            System.out.println("Error creating file.");
+            e.printStackTrace();
+        }
+
+        scan.close();
+	}
+
+
+
 }

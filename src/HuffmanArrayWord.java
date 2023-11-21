@@ -3,13 +3,13 @@
  *  Purpose: Complete Huffman encoding by word using an array implementation
  */
 
-import java.util.PriorityQueue;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class HuffmanArrayWord {
@@ -20,17 +20,24 @@ public class HuffmanArrayWord {
     private PriorityQueue<Map.Entry<String, Integer>> pq;
     private int wordCount;
 
+    public HuffmanArrayWord() {
+        huffmanArr = new String[256];
+        wordMap = new HashMap<>();
+        encodeMap = new HashMap<>();
+        wordCount = 0;
+    }
+
     public HuffmanArrayWord(String inputFileName, int cmd) {
         huffmanArr = new String[256];
-        wordMap = new HashMap<String, Integer>();
-        encodeMap = new HashMap<String, String>();
+        wordMap = new HashMap<>();
+        encodeMap = new HashMap<>();
         wordCount = 0;
 
         if (cmd == 0) {
             System.out.println("Encoding " + inputFileName);
-            encode(inputFileName, inputFileName + ".huf");
+            encode(inputFileName, "huf_" + inputFileName);
         } else if (cmd == 1) {
-            decode(inputFileName, inputFileName + ".dec", "decode.txt");
+            decode(inputFileName, "dec_" + inputFileName, "decode.txt");
         } else {
             System.out.println("Invalid command");
         }
@@ -50,10 +57,10 @@ public class HuffmanArrayWord {
 
         // Create Huffman Array
         huffmanArr = new String[pq.size()];
-        int index = 0;
+        int index = wordMap.size() - 1;
         while (pq.size() != 0) {
             huffmanArr[index] = pq.poll().getKey();
-            index++;
+            index--;
         }
 
         createEncode(huffmanArr);
@@ -86,10 +93,8 @@ public class HuffmanArrayWord {
     // Takes an array of words and maps them to binary strings that represent their
     // index in the array
     public void createEncode(String[] arr) {
-        int binarySize = (int) Math.ceil(Math.log(arr.length) / Math.log(2));
-
         for (int i = 0; i < arr.length; i++) {
-            encodeMap.put(arr[i], String.format("%" + binarySize + "s", Integer.toBinaryString(i)).replace(' ', '0'));
+            encodeMap.put(arr[i], String.format("%s", Integer.toBinaryString(i)).replace(' ', '0'));
         }
     }
 

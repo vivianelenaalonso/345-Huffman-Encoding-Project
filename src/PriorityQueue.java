@@ -7,7 +7,7 @@ public class PriorityQueue {
     private ArrayList<Node> heap;
 
     public PriorityQueue() {
-        heap = new ArrayList<Node>();
+        heap = new ArrayList<>();
 
     }
 
@@ -65,7 +65,7 @@ public class PriorityQueue {
         heap.set(pos2,temp);
     }
 
-    
+
 
     private int getParent(int index){
         return (index-1)/2;
@@ -79,7 +79,8 @@ public class PriorityQueue {
         return index*2+2;
     }
 
-    public String toString(){
+    @Override
+	public String toString(){
         String s = "";
         for (Node n: heap){
             s+=n.toString()+" ";
@@ -90,7 +91,7 @@ public class PriorityQueue {
     public boolean isEmpty(){
         return heap.size() == 0;
     }
-    
+
     /**
      * Peeks the first index of the heap and returns
      * the node.

@@ -5,7 +5,7 @@ public class MaxHeap {
     private ArrayList<Node> heap;
 
     public MaxHeap() {
-        heap = new ArrayList<Node>();
+        heap = new ArrayList<>();
 
     }
 
@@ -63,7 +63,7 @@ public class MaxHeap {
         heap.set(pos2,temp);
     }
 
-    
+
 
     private int getParent(int index){
         return (index-1)/2;
@@ -77,7 +77,8 @@ public class MaxHeap {
         return index*2+2;
     }
 
-    public String toString(){
+    @Override
+	public String toString(){
         String s = "";
         for (Node n: heap){
             s+=n.toString()+" ";
@@ -88,7 +89,7 @@ public class MaxHeap {
     public boolean isEmpty(){
         return heap.size() == 0;
     }
-    
+
     /**
      * Peeks the first index of the heap and returns
      * the node.
