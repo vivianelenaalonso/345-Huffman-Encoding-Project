@@ -24,14 +24,14 @@ public class HuffmanTest {
 		System.out.println("Word or Letter based encoding?");
 
 		String type = scan.nextLine();
-
+		
 		if (impl.equals("Array") && type.equals("Word")) {
 			HuffmanArrayWord huffman = new HuffmanArrayWord();
-			huffman.encode(file);
+			huffman.encode(file, outputFile);
 			System.out.println("Would you like to decode?");
 			String decode = scan.nextLine();
 			if (decode.equalsIgnoreCase("yes")) {
-				huffman.decode();
+				huffman.decode(outputFile, "dec_" + outputFile, "decode.txt");
 			}
 		} else if (impl.equals("Array") && type.equals("Letter")) {
 			HuffmanArrayLetter huffman = new HuffmanArrayLetter();

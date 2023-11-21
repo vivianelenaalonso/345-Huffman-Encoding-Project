@@ -20,6 +20,13 @@ public class HuffmanArrayWord {
     private PriorityQueue<Map.Entry<String, Integer>> pq;
     private int wordCount;
 
+    public HuffmanArrayWord() {
+        huffmanArr = new String[256];
+        wordMap = new HashMap<>();
+        encodeMap = new HashMap<>();
+        wordCount = 0;
+    }
+
     public HuffmanArrayWord(String inputFileName, int cmd) {
         huffmanArr = new String[256];
         wordMap = new HashMap<>();
@@ -86,8 +93,6 @@ public class HuffmanArrayWord {
     // Takes an array of words and maps them to binary strings that represent their
     // index in the array
     public void createEncode(String[] arr) {
-        int binarySize = (int) Math.ceil(Math.log(arr.length) / Math.log(2));
-
         for (int i = 0; i < arr.length; i++) {
             encodeMap.put(arr[i], String.format("%s", Integer.toBinaryString(i)).replace(' ', '0'));
         }
