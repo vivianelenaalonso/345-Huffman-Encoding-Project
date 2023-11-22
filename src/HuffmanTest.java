@@ -34,12 +34,12 @@ public class HuffmanTest {
 				huffman.decode(outputFile, "dec_" + outputFile, "decode.txt");
 			}
 		} else if (impl.equals("Array") && type.equals("Letter")) {
-			HuffmanArrayLetter huffman = new HuffmanArrayLetter();
-			huffman.encode(file);
+			HuffmanArrayLetter huffman = new HuffmanArrayLetter(file);
+			huffman.exportHuffmanFile(outputFile);
 			System.out.println("Would you like to decode?");
 			String decode = scan.nextLine();
 			if (decode.equalsIgnoreCase("yes")) {
-				huffman.decode();
+				huffman.decode(outputFile, "dec_" + outputFile, outputFile+"key.txt");
 			}
 		} else if (impl.equals("Tree") && type.equals("Word")) {
 			HuffmanTreeWord huffman = new HuffmanTreeWord();

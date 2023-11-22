@@ -18,6 +18,10 @@ public class MaxHeap {
 
         }
 
+    public boolean contains(Node n){
+        return heap.contains(n);
+    }
+
     public void add(String element, int frequency){
         Node n = new Node(frequency, element);
         heap.add(n);
