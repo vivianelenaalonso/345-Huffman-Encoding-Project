@@ -12,7 +12,7 @@ public class HuffmanTest {
 		String file;
 
 		System.out.println("Welcome to the Huffman Encoding Program!");
-		System.out.println("Would you like to open a file or enter a string?");
+		System.out.println("Would you like to open a file or enter a string? (String only works on Array Letter)");
 
 		String fileorstring = scan.nextLine();
 
@@ -43,6 +43,11 @@ public class HuffmanTest {
 		System.out.println("Word or Letter based encoding?");
 
 		String type = scan.nextLine();
+
+		if (fos == false && (impl.toLowerCase().equals("array") && type.toLowerCase().equals("letter")) == false){
+			System.out.println("Sorry, you can only use Array Letter with a string.");
+			System.exit(0);
+		}
 		
 		if (impl.toLowerCase().equals("array") && type.toLowerCase().equals("word")) {
 			HuffmanArrayWord huffman = new HuffmanArrayWord();

@@ -82,6 +82,12 @@ public class HuffmanArrayLetter {
             createHuffmanTree();
             createHuffmanMap("", 0);
             createHuffmanCodes(totalline);
+            System.out.println("The string to encode is: " + totalline.replace("|", "\n"));
+            System.out.println("The string is " + totalline.length()*8 + " bits long.");
+            System.out.println("Huffman Code Key:" + huffmanCodes.toString());
+            System.out.println("Encoded Text:" + encodedText);
+            System.out.println("Encoded Text is: " + encodedText.length() + " bits long.");
+            System.out.println("The compression ratio is: " + (double)encodedText.length()/(double)(totalline.length()*8));
             }
             catch (FileNotFoundException exception) {
             System.out.println("File was not found.");
@@ -195,7 +201,6 @@ public class HuffmanArrayLetter {
         String code = line[1];
         encodeMap.put(code, word);
       }
-      System.out.println(encodeMap.toString());
       scanner.close();
     } catch (FileNotFoundException e) {
       System.out.println(decodeFile + " not found");
@@ -206,7 +211,7 @@ public class HuffmanArrayLetter {
     public void createHuffmanTree(){
         int index = 0;
         //create the initial array, which is size #of nodes * 2 - 1
-        heap = new ArrayList<Node>(Arrays.asList(new Node[1024]));
+        heap = new ArrayList<Node>(Arrays.asList(new Node[256*256]));
         while (priorityQueue.size() > 1){
             Node left = priorityQueue.pop();
             Node right = priorityQueue.pop();
