@@ -18,20 +18,19 @@ public class HuffmanArrayWord {
   private HashMap<String, Integer> wordMap;
   private HashMap<String, String> encodeMap;
   private PriorityQueue<Map.Entry<String, Integer>> pq;
-  private int wordCount;
 
+  // Default constructor for HuffmanArrayWord
   public HuffmanArrayWord() {
     huffmanArr = new String[256];
     wordMap = new HashMap<>();
     encodeMap = new HashMap<>();
-    wordCount = 0;
   }
 
+  // Constructor for HuffmanArrayWord that takes in an input file and a command
   public HuffmanArrayWord(String inputFileName, int cmd) {
     huffmanArr = new String[256];
     wordMap = new HashMap<>();
     encodeMap = new HashMap<>();
-    wordCount = 0;
 
     if (cmd == 0) {
       System.out.println("Encoding " + inputFileName);
@@ -47,19 +46,16 @@ public class HuffmanArrayWord {
   public void encode(String inputFileName, String outputFileName) {
     readInputFile(inputFileName);
 
-    // Create priority queue
     pq =
       new PriorityQueue<>(
         wordMap.size(),
         (a, b) -> a.getValue() - b.getValue()
       );
 
-    // Add all words to priority queue
     for (Map.Entry<String, Integer> entry : wordMap.entrySet()) {
       pq.add(entry);
     }
 
-    // Create Huffman Array
     huffmanArr = new String[pq.size()];
     int index = wordMap.size() - 1;
     while (pq.size() != 0) {
@@ -68,11 +64,7 @@ public class HuffmanArrayWord {
     }
 
     createEncode(huffmanArr);
-
-    // Write to output file
     writeOutputFile(inputFileName, outputFileName, encodeMap);
-
-    // Write decode file
     writeDecodeFile(encodeMap, "decode.txt");
   }
 
@@ -122,6 +114,9 @@ public class HuffmanArrayWord {
         String[] line = scanner.nextLine().split(" ");
 
         for (int i = 0; i < line.length; i++) {
+          if(line[i].equals("")){
+            continue;
+          }
           if (i == line.length - 1) {
             stringBuilder += encodeMap.get(line[i]);
           } else {
@@ -224,7 +219,6 @@ public class HuffmanArrayWord {
         String word = scanner.next();
         if (wordMap.containsKey(word)) {
           wordMap.put(word, wordMap.get(word) + 1);
-          wordCount++;
         } else {
           wordMap.put(word, 1);
         }
@@ -232,7 +226,7 @@ public class HuffmanArrayWord {
 
       scanner.close();
     } catch (FileNotFoundException e) {
-      System.out.println(inputFileName + " not found");
+      System.out.println(inputFileName + " not found\n");
       e.printStackTrace();
     }
   }
