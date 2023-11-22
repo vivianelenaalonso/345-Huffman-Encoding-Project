@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 // file name: HuffmanTest.java
-// author: elodie hilbert, vivian alonso
+// author: elodie hilbert, vivian alonso, stephen pan
 // description: console based test program for our huffman encoding implementations.
 
 public class HuffmanTest {
