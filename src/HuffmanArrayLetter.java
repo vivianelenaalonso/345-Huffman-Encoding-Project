@@ -54,6 +54,7 @@ public class HuffmanArrayLetter {
             createPriorityQueue();
             createMaxHeap();
             createHuffmanTree();
+            System.out.println(heap.toString());
             createHuffmanMap("", 0);
             createHuffmanCodes(totalline);
             }
@@ -119,14 +120,18 @@ public class HuffmanArrayLetter {
       File inFile = new File(inputFileName);
       Scanner scanner = new Scanner(inFile);
       String decodeString = "";
-
+      int index = 0;
       while (scanner.hasNext()) {
-        String[] line = scanner.nextLine().split(" ");
-        for (int i = 0; i < line.length; i++) {
-          if (i == line.length - 1) {
-            decodeString += encodeMap.get(line[i]);
-          } else {
-            decodeString += encodeMap.get(line[i]) + " ";
+        String line = scanner.nextLine();
+        for (int i = 0; i < line.length(); i++) {
+          if (line.charAt(i) == '0') {
+            index = index*2+1;
+          } else if (line.charAt(i) == '1') {
+            index = index*2+2;
+          if (heap.get(index).word != "internal"){
+            decodeString += heap.get(index).word;
+            index = 0;
+          }
           }
         }
         decodeString += "\n";
@@ -175,21 +180,32 @@ public class HuffmanArrayLetter {
         int index = 0;
         //create the initial array, which is size #of nodes * 2 - 1
         heap = new ArrayList<Node>(Arrays.asList(new Node[128 * 128]));
-        while (temp.size() > 2) {
-            Node left = temp.pop();
-            Node internal = new Node(frequency, "internal");
-            heap.set(index, internal);
-            heap.set(index*2+1, left);
-            index = index*2+2;
-            frequency -= left.frequency;
+        while (priorityQueue.size() > 1){
+            Node left = priorityQueue.pop();
+            Node right = priorityQueue.pop();
+            Node internal = new Node(left.frequency + right.frequency, "internal");
+            internal.left = left;
+            internal.right = right;
+            priorityQueue.add(internal);
+            temp.add(internal);
         }
-        Node left = temp.pop();
-        Node right = temp.pop();
-        Node internal = new Node(frequency, "internal");
-        heap.set(index, internal);
-        heap.set(index*2+1, left);
-        heap.set(index*2+2, right);
+        Node root = temp.pop();
+        heap.set(index,root);
+        createArrayTree(root.left, index*2+1);
+        createArrayTree(root.right, index*2+2);
+        }
+
+
+    public void createArrayTree(Node root, int index){
+        if (root.right == null && root.left == null) {
+            heap.set(index, root);
+        }else{
+            heap.set(index,root);
+            createArrayTree(root.left, index*2+1);
+            createArrayTree(root.right, index*2+2);
+        }
     }
+
     public void createHuffmanMap(String code, int index){
         //implement later
         if (heap.get(index).word != "internal"){
