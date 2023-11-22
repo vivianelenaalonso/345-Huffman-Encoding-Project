@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "HuffmanTreeLetterTest",
+            "request": "launch",
+            "mainClass": "HuffmanTreeLetterTest",
+            "projectName": "345-Huffman-Encoding-Project"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

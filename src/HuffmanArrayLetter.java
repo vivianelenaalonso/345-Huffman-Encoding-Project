@@ -1,3 +1,9 @@
+/*  File: HuffmanArrayLetter.java
+ *  Author: Stephen Pan
+ *  Purpose: Complete Huffman encoding by letter using an array implementation
+ */
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,33 +17,32 @@ import java.util.Map;
 
 
 public class HuffmanArrayLetter {
+
     private PriorityQueue priorityQueue;
 	private Map<String, Integer> frequencyMap;
 	private Map<String, String> huffmanCodes;
     private HashMap<String, String> encodeMap;
 	private String encodedText;
-	private String decodedText;
-    private ArrayList<Node> heap;
+    private ArrayList<Node> heap; //named heap but actually is the tree
     private MaxHeap temp;
-    private int frequency = 0;
 
+    //default constructor
     public HuffmanArrayLetter(String filename, boolean isFile) {
         priorityQueue = new PriorityQueue();
         frequencyMap = new HashMap<>();
         huffmanCodes = new HashMap<>();
         encodeMap = new HashMap<>();
         temp = new MaxHeap();
-        if (isFile) {
+        if (isFile) { //checks for by string or by file
             readFileToEncode(filename);
         } else {
             readStringtoEncode(filename);
         }
     }
-    public void readFiletoDecode(String filenameencoded, String filenamekey){
-        //assuming that the file is in the format of the encoded text as well as a key in the format of A:10101 every line
-    }
+    
 
     public String readStringtoEncode(String string){
+        //this method reads a string and creates huffman tree
         for (int i = 0; i < string.length(); i++) {
             if (frequencyMap.containsKey(String.valueOf(string.charAt(i)))) {
                 frequencyMap.put(String.valueOf(string.charAt(i)), frequencyMap.get(String.valueOf(string.charAt(i))) + 1);
@@ -51,6 +56,8 @@ public class HuffmanArrayLetter {
         createHuffmanTree();
         createHuffmanMap("", 0);
         createHuffmanCodes(string);
+
+        //a bunch of detailed print statements for flair
         System.out.println("The string to encode is: " + string);
         System.out.println("The string is " + string.length()*8 + " bits long.");
         System.out.println("Huffman Code Key:" + huffmanCodes.toString());
@@ -61,6 +68,7 @@ public class HuffmanArrayLetter {
     }
 
     public void readFileToEncode(String filename){
+        //same as above but for files
         try {
             Scanner file = new Scanner(new File(filename));
             String totalline = "";
@@ -98,6 +106,7 @@ public class HuffmanArrayLetter {
         }
 
     public void exportHuffmanFile(String filename){
+        //this method exports the encoded text and the huffman key to a file
         try {
             File file = new File(filename);
             file.createNewFile();
@@ -127,13 +136,14 @@ public class HuffmanArrayLetter {
 
     
     public void createPriorityQueue(){
+        //this method creates the priority queue
         for (String key : frequencyMap.keySet()) {
             Node n = new Node(frequencyMap.get(key), key);
-            frequency += frequencyMap.get(key);
             priorityQueue.add(n);
         }
     }
     public void createMaxHeap(){
+        //this method creates the max heap
         for (String key : frequencyMap.keySet()) {
             Node n = new Node(frequencyMap.get(key), key);
             temp.add(n);
@@ -141,77 +151,80 @@ public class HuffmanArrayLetter {
     }
 
     public void decode(String inputFileName, String outputFileName, String decodeFile) {
+        //this method decodes the encoded text from the files
+        createDecodeMap(decodeFile);
 
-    createDecodeMap(decodeFile);
-
-    try {
-      File inFile = new File(inputFileName);
-      Scanner scanner = new Scanner(inFile);
-      String decodeString = "";
-      int index = 0;
-      while (scanner.hasNext()) {
-        String line = scanner.nextLine();
-        for (int i = 0; i < line.length(); i++) {
-          if (line.charAt(i) == '0') {
-            index = index*2+1;
-          } else if (line.charAt(i) == '1') {
-            index = index*2+2;
-          }
-          if (heap.get(index).word != "internal"){
-                if (heap.get(index).word.equals("|")){
-                    decodeString += "\n";
-                }
-                else{
-                    decodeString += heap.get(index).word;
-                }
-                index = 0;
-          }
+        try {
+        File inFile = new File(inputFileName);
+        Scanner scanner = new Scanner(inFile);
+        String decodeString = "";
+        int index = 0;
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
+            for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == '0') {
+                index = index*2+1;
+            } else if (line.charAt(i) == '1') {
+                index = index*2+2;
+            }
+            if (heap.get(index).word != "internal"){
+                    if (heap.get(index).word.equals("|")){
+                        decodeString += "\n";
+                    }
+                    else{
+                        decodeString += heap.get(index).word;
+                    }
+                    index = 0;
+            }
+            }
         }
-      }
-      System.out.println(decodeString);
+        System.out.println(decodeString);
 
-      File outFile = new File(outputFileName);
+        File outFile = new File(outputFileName);
 
-      try {
-        outFile.createNewFile();
+        try {
+            outFile.createNewFile();
 
-        FileWriter writer = new FileWriter(outFile);
-        writer.write(decodeString);
-        writer.close();
-      } catch (IOException e) {
-        System.out.println("Error creating file");
+            FileWriter writer = new FileWriter(outFile);
+            writer.write(decodeString);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error creating file");
+            e.printStackTrace();
+        }
+
+        scanner.close();
+        } catch (FileNotFoundException e) {
+        System.out.println(inputFileName + " not found");
         e.printStackTrace();
-      }
-
-      scanner.close();
-    } catch (FileNotFoundException e) {
-      System.out.println(inputFileName + " not found");
-      e.printStackTrace();
+        }
     }
-  }
 
   public void createDecodeMap(String decodeFile) {
-    try {
-      File file = new File(decodeFile);
-      Scanner scanner = new Scanner(file);
+        //this method creates the decode hashmap
+        try {
+        File file = new File(decodeFile);
+        Scanner scanner = new Scanner(file);
 
-      while (scanner.hasNext()) {
-        String[] line = scanner.nextLine().split(":");
-        String word = line[0];
-        String code = line[1];
-        encodeMap.put(code, word);
-      }
-      scanner.close();
-    } catch (FileNotFoundException e) {
-      System.out.println(decodeFile + " not found");
-      e.printStackTrace();
+        while (scanner.hasNext()) {
+            String[] line = scanner.nextLine().split(":");
+            String word = line[0];
+            String code = line[1];
+            encodeMap.put(code, word);
+        }
+        scanner.close();
+        } catch (FileNotFoundException e) {
+        System.out.println(decodeFile + " not found");
+        e.printStackTrace();
+        }
     }
-  }
 
     public void createHuffmanTree(){
+        //this method creates the huffman tree. bane of my existence.
         int index = 0;
         //create the initial array, which is size #of nodes * 2 - 1
-        heap = new ArrayList<Node>(Arrays.asList(new Node[256*256]));
+        heap = new ArrayList<Node>(Arrays.asList(new Node[256*256])); //I initialize the array to a LARGE size because there will be a lot of null values.
+        //this part below creates the maxheap
         while (priorityQueue.size() > 1){
             Node left = priorityQueue.pop();
             Node right = priorityQueue.pop();
@@ -221,6 +234,7 @@ public class HuffmanArrayLetter {
             priorityQueue.add(internal);
             temp.add(internal);
         }
+        //now we have to create the array tree from the top down.
         Node root = temp.pop();
         heap.set(index,root);
         createArrayTree(root.left, index*2+1);
@@ -229,6 +243,7 @@ public class HuffmanArrayLetter {
 
 
     public void createArrayTree(Node root, int index){
+        //recursive function to create the array tree
         if (root.right == null && root.left == null) {
             heap.set(index, root);
         }else{
@@ -239,7 +254,7 @@ public class HuffmanArrayLetter {
     }
 
     public void createHuffmanMap(String code, int index){
-        //implement later
+        //this method creates the huffman tree key
         if (heap.get(index).word != "internal"){
             huffmanCodes.put(heap.get(index).word, code);
         }
@@ -250,7 +265,7 @@ public class HuffmanArrayLetter {
         
     }
     public void createHuffmanCodes(String line){
-        //implement later
+        //this method creates the encoded text
         encodedText = "";
         for (int i = 0; i < line.length(); i++) {
             encodedText += huffmanCodes.get(String.valueOf(line.charAt(i)));

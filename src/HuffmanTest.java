@@ -73,6 +73,7 @@ public class HuffmanTest {
 			String decode = scan.nextLine();
 			if (decode.equalsIgnoreCase("yes")) {
 				huffman.huffmanDecode();
+				huffman.printDecode();
 			}
 		} else if (impl.toLowerCase().equals("tree") && type.toLowerCase().equals("letter")) {
 			HuffmanTreeLetter huffman = new HuffmanTreeLetter();

@@ -1,6 +1,9 @@
-// author(s): stephen pan, vivian alonso
+/*  File: PriorityQueue.java
+ *  Author: Stephen Pan, Vivian Alonso
+ *  Purpose: Min-heap implementation for Huffman encoding
+ */
 
-import java.util.ArrayList;
+ import java.util.ArrayList;
 
 public class PriorityQueue {
 

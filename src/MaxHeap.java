@@ -1,3 +1,8 @@
+/*  File: MaxHeap.java
+ *  Author: Stephen Pan
+ *  Purpose: Max-heap implementation for Huffman encoding
+ */
+
 import java.util.ArrayList;
 
 public class MaxHeap {
