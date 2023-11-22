@@ -21,40 +21,65 @@ public class HuffmanArrayLetter {
     private MaxHeap temp;
     private int frequency = 0;
 
-    public HuffmanArrayLetter(String filename) {
+    public HuffmanArrayLetter(String filename, boolean isFile) {
         priorityQueue = new PriorityQueue();
         frequencyMap = new HashMap<>();
         huffmanCodes = new HashMap<>();
         encodeMap = new HashMap<>();
         temp = new MaxHeap();
-        readFileToEncode(filename);
+        if (isFile) {
+            readFileToEncode(filename);
+        } else {
+            readStringtoEncode(filename);
+        }
     }
     public void readFiletoDecode(String filenameencoded, String filenamekey){
         //assuming that the file is in the format of the encoded text as well as a key in the format of A:10101 every line
     }
+
+    public String readStringtoEncode(String string){
+        for (int i = 0; i < string.length(); i++) {
+            if (frequencyMap.containsKey(String.valueOf(string.charAt(i)))) {
+                frequencyMap.put(String.valueOf(string.charAt(i)), frequencyMap.get(String.valueOf(string.charAt(i))) + 1);
+            }
+            else {
+                frequencyMap.put(String.valueOf(string.charAt(i)), 1);
+            }
+        }
+        createPriorityQueue();
+        createMaxHeap();
+        createHuffmanTree();
+        createHuffmanMap("", 0);
+        createHuffmanCodes(string);
+        System.out.println("The string to encode is: " + string);
+        System.out.println("The string is " + string.length()*8 + " bits long.");
+        System.out.println("Huffman Code Key:" + huffmanCodes.toString());
+        System.out.println("Encoded Text:" + encodedText);
+        System.out.println("Encoded Text is: " + encodedText.length() + " bits long.");
+        System.out.println("The compression ratio is: " + (double)encodedText.length()/(double)(string.length()*8));
+        return encodedText;
+    }
+
     public void readFileToEncode(String filename){
         try {
             Scanner file = new Scanner(new File(filename));
             String totalline = "";
             while (file.hasNextLine()) {
                 String line = file.nextLine();
-                totalline += line;
-                char[] letters = line.toCharArray();
-                for (int i = 0; i < letters.length; i++) {
-                    if (frequencyMap.containsKey(String.valueOf(letters[i]))) {
-                        frequencyMap.put(String.valueOf(letters[i]), frequencyMap.get(String.valueOf(letters[i])) + 1);
-                    }
-                    else {
-                        frequencyMap.put(String.valueOf(letters[i]), 1);
-                    }
+                totalline += (line + "|"); //bad solution, but i'm going to use | as the newline character here.
                 }
-                
+            for (int i = 0; i < totalline.length(); i++) {
+                if (frequencyMap.containsKey(String.valueOf(totalline.charAt(i)))) {
+                    frequencyMap.put(String.valueOf(totalline.charAt(i)), frequencyMap.get(String.valueOf(totalline.charAt(i))) + 1);
                 }
+                else {
+                    frequencyMap.put(String.valueOf(totalline.charAt(i)), 1);
+                }
+            }
             file.close();
             createPriorityQueue();
             createMaxHeap();
             createHuffmanTree();
-            System.out.println(heap.toString());
             createHuffmanMap("", 0);
             createHuffmanCodes(totalline);
             }
@@ -110,9 +135,6 @@ public class HuffmanArrayLetter {
     }
 
     public void decode(String inputFileName, String outputFileName, String decodeFile) {
-    System.out.println(inputFileName);
-    System.out.println(outputFileName);
-    System.out.println(decodeFile);
 
     createDecodeMap(decodeFile);
 
@@ -128,14 +150,19 @@ public class HuffmanArrayLetter {
             index = index*2+1;
           } else if (line.charAt(i) == '1') {
             index = index*2+2;
-          if (heap.get(index).word != "internal"){
-            decodeString += heap.get(index).word;
-            index = 0;
           }
+          if (heap.get(index).word != "internal"){
+                if (heap.get(index).word.equals("|")){
+                    decodeString += "\n";
+                }
+                else{
+                    decodeString += heap.get(index).word;
+                }
+                index = 0;
           }
         }
-        decodeString += "\n";
       }
+      System.out.println(decodeString);
 
       File outFile = new File(outputFileName);
 
@@ -179,7 +206,7 @@ public class HuffmanArrayLetter {
     public void createHuffmanTree(){
         int index = 0;
         //create the initial array, which is size #of nodes * 2 - 1
-        heap = new ArrayList<Node>(Arrays.asList(new Node[128 * 128]));
+        heap = new ArrayList<Node>(Arrays.asList(new Node[1024]));
         while (priorityQueue.size() > 1){
             Node left = priorityQueue.pop();
             Node right = priorityQueue.pop();
